@@ -1,3 +1,3 @@
 <template>
-  <div>leftmenu</div>
+  <div>leftmenus</div>
 </template>
