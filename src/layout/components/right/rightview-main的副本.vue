@@ -1,13 +1,14 @@
 <template>
-  <div style="margin-bottom: 20px;">
-    <el-tabs
-      v-model="addtags.editableTabsValue"
-      type="card"
-      closable
-      @tab-remove="removeTab"
-    >
+  <section class="head-tags">
+    <div>
+      <!-- <el-button size="small" @click="addTab(editableTabsValue)">
+        add tab
+      </el-button> -->
+      {{ editableTabs }}
+    </div>
+    <el-tabs v-model="addtags" type="card" closable @tab-remove="removeTab">
       <el-tab-pane
-        v-for="(item, index) in addtags.editTabs"
+        v-for="(item, index) in addtags"
         :key="item.name"
         :label="item.title"
         :name="item.name"
@@ -15,7 +16,7 @@
         {{ item.content }}
       </el-tab-pane>
     </el-tabs>
-  </div>
+  </section>
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -23,17 +24,28 @@ export default {
   data() {
     return {
       editableTabsValue: "2",
-      tabIndex: 2,
+      editableTabs: 0,
+      // editableTabs: $store.getters.addtags,
+      // editableTabs: [
+      //   {
+      //     title: "Tab 1",
+      //     name: "1",
+      //     content: "Tab 1 content",
+      //   },
+      // ],
+      tabIndex: 0,
     };
   },
   computed: {
     ...mapGetters(["addtags"]),
   },
   methods: {
+    // addtags(targetName) {},
     // addTab(targetName) {
+    //   console.log(this.addtags);
     //   let newTabName = ++this.tabIndex + "";
     //   this.editableTabs.push({
-    //     title: "New Tab",
+    //     title: this.addtags,
     //     name: newTabName,
     //     content: "New Tab content",
     //   });

@@ -1,12 +1,12 @@
 <template>
-  <el-row>
-    <el-col :span="6">
+  <article class="app-wp">
+    <section class="left-view">
       <Leftview></Leftview>
-    </el-col>
-    <el-col :span="18">
+    </section>
+    <section class="right-view">
       <Rightview></Rightview>
-    </el-col>
-  </el-row>
+    </section>
+  </article>
 </template>
 
 <script>
@@ -23,3 +23,18 @@ export default {
   },
 };
 </script>
+<style scoped>
+.app-wp {
+  width: 100%;
+  height: 100%;
+}
+.left-view {
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  background: #545c64;
+}
+.right-view {
+  margin-left: 200px;
+}
+</style>
