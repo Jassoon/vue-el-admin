@@ -2,14 +2,20 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 // import Home from '../views/Home.vue';
 import Layout from "@/layout/layout.vue";
-import guide from "@/views/guide/index";
+import Guide from "@/views/guide/index";
+import Login from "@/views/login/index";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  {
     path: "/guide",
-    component: guide,
+    component: Guide,
     redirect: "/guide/index",
     children: [
       {

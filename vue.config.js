@@ -70,15 +70,15 @@ module.exports = {
   },
   // 所有 webpack-dev-server 的选项都支持
   devServer: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:8080",
-        changeOrigin: true,
-        pathRewrite: {
-          "^/api": "/mock"
-        }
-      }
-    }
+    // proxy: {
+    //   "/api": {
+    //     target: "http://localhost:8080",
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       "^/api": "/mock"
+    //     }
+    //   }
+    // }
   },
   // 是否为 Babel 或 TypeScript 使用 thread-loader
   parallel: require("os").cpus().length > 1,
