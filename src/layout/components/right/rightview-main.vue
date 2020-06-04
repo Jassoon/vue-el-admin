@@ -1,18 +1,19 @@
 <template>
   <div style="margin-bottom: 20px;">
     <el-tabs
-      v-model="addtags.editableTabsValue"
+      v-model="tagsview.editableTabsValue"
       type="card"
       closable
-      @tab-remove="removeTab"
+      @tab-remove="removeTab(tagsview.editableTabsValue)"
     >
       <el-tab-pane
-        v-for="(item, index) in addtags.editTabs"
+        v-for="(item, index) in tagsview.editTabs"
         :key="item.name"
         :label="item.title"
         :name="item.name"
       >
         {{ item.content }}
+        <router-view></router-view>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -27,19 +28,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["addtags"]),
+    ...mapGetters(["tagsview"]),
   },
   methods: {
-    // addTab(targetName) {
-    //   let newTabName = ++this.tabIndex + "";
-    //   this.editableTabs.push({
-    //     title: "New Tab",
-    //     name: newTabName,
-    //     content: "New Tab content",
-    //   });
-    //   this.editableTabsValue = newTabName;
-    // },
-    removeTab(targetName) {
+    removeTab(editableTabsValue) {
+      this.$store.dispatch("removeTab", editableTabsValue);
+    },
+    removeTab1(targetName) {
       let tabs = this.editableTabs;
       let activeName = this.editableTabsValue;
       if (activeName === targetName) {

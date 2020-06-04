@@ -34,7 +34,7 @@ export default {
   computed: {
     // ...mapGetters(["addtags"]),
     routes() {
-      // console.log(this.$router);
+      // console.log(this.$router.options);
       // console.log(this.$router.options.routes);
       return this.$router.options.routes;
     },
@@ -44,17 +44,16 @@ export default {
   },
   methods: {
     // ...mapActions({"addtags"}),
-    addtag() {
-      this.$store.dispatch("addtags", this.menuname);
-    },
+    // addtag() {
+    //   this.$store.dispatch("addtags", this.menuname);
+    // },
     handleOpen(key, keyPath) {
       // this.$store.dispatch("addtags", "1");
       // console.log(this.$store);
-      console.log(key, keyPath);
-      console.log(this.routes);
+      // console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
   },
 };

@@ -21,6 +21,12 @@ const tagsview = {
       };
       commit(types.ADD_TAGS, Tnames);
     },
+    removeTab({commit,state}, targetNameid) {
+      if(state.editableTabsValue == targetNameid){
+        console.log(targetNameid)
+      }
+
+    }
   },
   // actions: {
   //   addtags({ commit }, name) {

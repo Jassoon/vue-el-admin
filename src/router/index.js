@@ -12,17 +12,20 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+    hidden: true
   },
   {
     path: "/guide",
-    component: Guide,
-    redirect: "/guide/index",
+    component: Layout,
+    // redirect: "/guide/index",
+    meta: { title: "综合区", icon: "guide", noCache: true },
+    hidden: false,
     children: [
       {
-        path: "index",
+        path: "/guide",
         component: () => import("@/views/guide/index"),
         name: "Guide",
-        meta: { title: "指南", icon: "guide", noCache: true },
+        meta: { title: "指南一", icon: "guide", noCache: true },
       },
     ],
   },
@@ -31,16 +34,36 @@ const routes = [
     path: "/",
     name: "Layout",
     component: Layout,
+    hidden: true
+    
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: '/404',
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
+        import('@/views/errorPage/404'),
+    hidden: true
+},
+{
+    path: '/icons/icons',
+    component: Layout,
+    // redirect: '/page/test-page/index',
+    meta: { title: '测试菜单', icon: 'goods', noCache: true },
+    name: 'test-page',
+    hidden: false,
+    children: [{
+        path: '/icons',
+        component: () =>
+            import('@/views/icons/icons'),
+        name: 'test-page-index',
+        meta: { tagName: '测试页', title: '测试页', icon: 'qq', noCache: false }
+    }, {
+        path: '/table',
+        component: () =>
+            import('@/views/table/table'),
+        name: 'test-page-index2',
+        meta: { tagName: '表格样式', title: '测试页2', icon: 'user', noCache: false }
+    }]
+},
 ];
 
 const router = new VueRouter({
