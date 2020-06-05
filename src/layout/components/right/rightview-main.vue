@@ -4,17 +4,23 @@
       v-model="tagsview.editableTabsValue"
       type="card"
       closable
+      addable
+      editable
+
       @tab-remove="removeTab"
+      @tab-click="clickTab"
     >
+    <!-- <router-link to="/icons"> -->
       <el-tab-pane
         v-for="item in tagsview.editTabs"
         :key="item.name"
         :label="item.title"
         :name="item.name"
       >
-        <!-- {{ item.content }} -->
+        {{ item.content }}
         <router-view></router-view>
       </el-tab-pane>
+    <!-- </router-link> -->
     </el-tabs>
   </div>
 </template>
@@ -29,27 +35,21 @@ export default {
   },
   computed: {
     ...mapGetters(["tagsview"]),
+    routes() {
+      return this.$router.options.routes;
+    },
   },
   methods: {
     removeTab(targetName) {
       this.$store.dispatch("removeTab", targetName);
     },
-    removeTab1(targetName) {
-      let tabs = this.editableTabs;
-      let activeName = this.editableTabsValue;
-      if (activeName === targetName) {
-        tabs.forEach((tab, index) => {
-          if (tab.name === targetName) {
-            let nextTab = tabs[index + 1] || tabs[index - 1];
-            if (nextTab) {
-              activeName = nextTab.name;
-            }
-          }
-        });
-      }
-
-      this.editableTabsValue = activeName;
-      this.editableTabs = tabs.filter((tab) => tab.name !== targetName);
+    clickTab(tab) {
+      let sopath = this.tagsview.editTabs;
+      let pat = sopath.filter(item => {
+        return item.name === tab.name
+      })
+      this.$router.push(pat[0].ispath)
+      
     },
   },
 };

@@ -7,7 +7,7 @@
       </template>
       <template :index="citem.index" v-for="citem in routes.children">
         <Links :to="citem.path" :key="citem.path" >
-          <el-menu-item @click="addtag({editableTabsValue:tagsview.editableTabsValue ,title:citem.meta.title})">
+          <el-menu-item @click="addtag({editableTabsValue:tagsview.editableTabsValue ,title:citem.meta.title,path:citem.path})">
             {{ citem.meta.title }}
           </el-menu-item>
         </Links>

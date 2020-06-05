@@ -4,6 +4,7 @@ const tagsview = {
     editableTabsValue: "0",
     tabIndex: "0",
     editTabs: [],
+    ispath:""
   },
   mutations: {
     [types.ADD_TAGS]: (state, targetName) => {      
@@ -15,8 +16,11 @@ const tagsview = {
         state.editTabs.push({
           title: targetName.title,
           name: newTabName,
+          ispath:targetName.path,
+          content:newTabName+"试试"
         });
         state.editableTabsValue = newTabName;
+        state.ispath = targetName.path
       }else{
         iftitle.forEach((item ,i)=>{
           state.editableTabsValue = item.name
@@ -38,7 +42,8 @@ const tagsview = {
       }
       state.editableTabsValue = activeName;
       state.editTabs = tabs.filter(tab => tab.name !== targetName)
-    },
+    }
+   
   },
   actions: {
     addtags({ commit, state }, targetName) {

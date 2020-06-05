@@ -4,8 +4,8 @@
     <div class="menu">
       <el-menu
         default-active="2"
+        unique-opened
         class="el-menu-vertical-demo"
-        unique-opened="true"
         @open="handleOpen"
         @close="handleClose"
       >
