@@ -8,7 +8,8 @@
       <template :index="citem.index" v-for="citem in routes.children">
         <!-- <Links :to="citem.path" :key="citem.path" > -->
         <router-link :to="citem.path" :key="citem.path">
-          <el-menu-item @click="addtag(citem.meta.title)" to="/guide">
+          <!-- <el-menu-item @click="addtag(citem.meta.title)" to="/guide"> -->
+          <el-menu-item @click="addtag({editableTabsValue:tagsview.editableTabsValue ,title:citem.meta.title})" to="/guide">
             {{ citem.meta.title }}
           </el-menu-item>
         </router-link>  
@@ -18,6 +19,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import Links from "../links"
 export default {
   data() {
@@ -32,7 +34,7 @@ export default {
     routes: Object,
   },
   computed: {
-
+    ...mapGetters(["tagsview"]),
   },
   methods:{
      addtag(title) {

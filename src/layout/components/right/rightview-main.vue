@@ -4,7 +4,7 @@
       v-model="tagsview.editableTabsValue"
       type="card"
       closable
-      @tab-remove="removeTab(tagsview.editableTabsValue)"
+      @tab-remove="removeTab"
     >
       <el-tab-pane
         v-for="(item, index) in tagsview.editTabs"
@@ -23,17 +23,19 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      editableTabsValue: "2",
-      tabIndex: 2,
+      // editableTabsValue: "2",
+      // tabIndex: 2,
     };
   },
   computed: {
     ...mapGetters(["tagsview"]),
   },
   methods: {
-    removeTab(editableTabsValue) {
-      this.$store.dispatch("removeTab", editableTabsValue);
+    removeTab(targetName) {
+      this.$store.dispatch("removeTab", targetName);
     },
+
+
     removeTab1(targetName) {
       let tabs = this.editableTabs;
       let activeName = this.editableTabsValue;

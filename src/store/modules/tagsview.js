@@ -7,32 +7,39 @@ const tagsview = {
   },
   mutations: {
     [types.ADD_TAGS]: (state, targetName) => {
-      state.editableTabsValue = state.tabIndex;
-      state.tabIndex = ++state.tabIndex + "";
-      state.editTabs.push(targetName);
+      let newTabName = ++state.tabIndex + ""
+      state.editTabs.push({
+        title: targetName.title,
+        name: newTabName,
+        content: "New Tab content" + state.tabIndex,
+      });
+      state.editableTabsValue = newTabName;
+    },
+    [types.REMOVE_TAGS]: (state, targetName) => {
+      let tabs = state.editTabs;
+      let activeName = state.editableTabsValue;
+      if(activeName ===targetName){
+        state.editTabs.forEach((tab,index) => {
+            if(tab.name===targetName){
+              let nextTab = tabs[index+1] || tabs[index-1]
+              if(nextTab){
+                activeName = nextTab.name
+              }
+            }
+        });
+      }
+      state.editableTabsValue = activeName;
+      state.editTabs = tabs.filter(tab => tab.name !== targetName)
     },
   },
   actions: {
     addtags({ commit, state }, targetName) {
-      let Tnames = {
-        title: targetName,
-        name: state.tabIndex + "",
-        content: "New Tab content" + state.tabIndex,
-      };
-      commit(types.ADD_TAGS, Tnames);
+      commit(types.ADD_TAGS, targetName);
     },
-    removeTab({commit,state}, targetNameid) {
-      if(state.editableTabsValue == targetNameid){
-        console.log(targetNameid)
-      }
-
+    removeTab({commit,state}, targetName) {
+      commit(types.REMOVE_TAGS, targetName);
     }
   },
-  // actions: {
-  //   addtags({ commit }, name) {
-  //     commit(types.ADD_TAGS, name);
-  //   },
-  // },
 };
 
 export default tagsview;
