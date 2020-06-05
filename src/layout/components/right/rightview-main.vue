@@ -7,12 +7,12 @@
       @tab-remove="removeTab"
     >
       <el-tab-pane
-        v-for="(item, index) in tagsview.editTabs"
+        v-for="item in tagsview.editTabs"
         :key="item.name"
         :label="item.title"
         :name="item.name"
       >
-        {{ item.content }}
+        <!-- {{ item.content }} -->
         <router-view></router-view>
       </el-tab-pane>
     </el-tabs>
@@ -34,8 +34,6 @@ export default {
     removeTab(targetName) {
       this.$store.dispatch("removeTab", targetName);
     },
-
-
     removeTab1(targetName) {
       let tabs = this.editableTabs;
       let activeName = this.editableTabsValue;

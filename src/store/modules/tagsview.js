@@ -6,14 +6,22 @@ const tagsview = {
     editTabs: [],
   },
   mutations: {
-    [types.ADD_TAGS]: (state, targetName) => {
-      let newTabName = ++state.tabIndex + ""
-      state.editTabs.push({
-        title: targetName.title,
-        name: newTabName,
-        content: "New Tab content" + state.tabIndex,
-      });
-      state.editableTabsValue = newTabName;
+    [types.ADD_TAGS]: (state, targetName) => {      
+      let iftitle = state.editTabs.filter(item =>{
+        return item.title === targetName.title     
+      })
+      if(iftitle.length===0){
+        let newTabName = ++state.tabIndex + ""
+        state.editTabs.push({
+          title: targetName.title,
+          name: newTabName,
+        });
+        state.editableTabsValue = newTabName;
+      }else{
+        iftitle.forEach((item ,i)=>{
+          state.editableTabsValue = item.name
+        })        
+      }
     },
     [types.REMOVE_TAGS]: (state, targetName) => {
       let tabs = state.editTabs;
@@ -34,6 +42,13 @@ const tagsview = {
   },
   actions: {
     addtags({ commit, state }, targetName) {
+      // -----------------------------------------------------------------------------------------------------------------------------up
+      // let iftitle = state.editTabs.filter(item =>{
+      //   return item.title === targetName.title     
+      // })
+      // if(iftitle.length===0){
+      //   commit(types.ADD_TAGS, targetName);
+      // }
       commit(types.ADD_TAGS, targetName);
     },
     removeTab({commit,state}, targetName) {

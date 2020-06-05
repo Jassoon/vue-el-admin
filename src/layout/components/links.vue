@@ -21,7 +21,6 @@ export default {
             return isExternal(routePath)
         },
         linkFormat(url) {
-            console.log(1111)
             if (this.isExternalLink(url)) {
                 return {
                 is: 'a',

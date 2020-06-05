@@ -6,14 +6,11 @@
         <span>{{ routes.meta.title }}</span>
       </template>
       <template :index="citem.index" v-for="citem in routes.children">
-        <!-- <Links :to="citem.path" :key="citem.path" > -->
-        <router-link :to="citem.path" :key="citem.path">
-          <!-- <el-menu-item @click="addtag(citem.meta.title)" to="/guide"> -->
-          <el-menu-item @click="addtag({editableTabsValue:tagsview.editableTabsValue ,title:citem.meta.title})" to="/guide">
+        <Links :to="citem.path" :key="citem.path" >
+          <el-menu-item @click="addtag({editableTabsValue:tagsview.editableTabsValue ,title:citem.meta.title})">
             {{ citem.meta.title }}
           </el-menu-item>
-        </router-link>  
-        <!-- </Links> -->
+        </Links>
       </template>
     </el-submenu>
   </div>
@@ -37,10 +34,12 @@ export default {
     ...mapGetters(["tagsview"]),
   },
   methods:{
-     addtag(title) {
-      this.$store.dispatch("addtags", title);
+     addtag(editcons) {
+      this.$store.dispatch("addtags", editcons);
     },
   }
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.router-link-active li{background: coral;}
+</style>
