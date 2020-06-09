@@ -12,10 +12,10 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
-    hidden: true
+    hidden: true,
   },
   {
-    path: "/guide",
+    path: "",
     component: Layout,
     // redirect: "/guide/index",
     meta: { title: "综合区", icon: "guide", noCache: true },
@@ -27,6 +27,12 @@ const routes = [
         name: "Guide",
         meta: { title: "指南一", icon: "guide", noCache: true },
       },
+      {
+        path: "/user",
+        component: () => import("@/views/user/index"),
+        name: "user",
+        meta: { title: "指南二", icon: "guide", noCache: true },
+      },
     ],
   },
 
@@ -34,36 +40,45 @@ const routes = [
     path: "/",
     name: "Layout",
     component: Layout,
-    hidden: true
-    
+    hidden: true,
   },
   {
-    path: '/404',
-    component: () =>
-        import('@/views/errorPage/404'),
-    hidden: true
-},
-{
-    path: '/icons/icons',
+    path: "/404",
+    component: () => import("@/views/errorPage/404"),
+    hidden: true,
+  },
+  {
+    path: "/icons/icons",
     component: Layout,
     // redirect: '/page/test-page/index',
-    meta: { title: '测试菜单', icon: 'goods', noCache: true },
-    name: 'test-page',
+    meta: { title: "测试菜单", icon: "goods", noCache: true },
+    name: "test-page",
     hidden: false,
-    children: [{
-        path: '/icons',
-        component: () =>
-            import('@/views/icons/icons'),
-        name: 'test-page-index',
-        meta: { tagName: '测试页', title: '测试页', icon: 'qq', noCache: false }
-    }, {
-        path: '/table',
-        component: () =>
-            import('@/views/table/table'),
-        name: 'test-page-index2',
-        meta: { tagName: '表格样式', title: '测试页2', icon: 'user', noCache: false }
-    }]
-},
+    children: [
+      {
+        path: "/icons",
+        component: () => import("@/views/icons/icons"),
+        name: "test-page-index",
+        meta: {
+          tagName: "测试页",
+          title: "测试页",
+          icon: "qq",
+          noCache: false,
+        },
+      },
+      {
+        path: "/table",
+        component: () => import("@/views/table/table"),
+        name: "test-page-index2",
+        meta: {
+          tagName: "表格样式",
+          title: "测试页2",
+          icon: "user",
+          noCache: false,
+        },
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

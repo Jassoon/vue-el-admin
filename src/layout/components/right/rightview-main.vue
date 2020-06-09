@@ -6,11 +6,10 @@
       closable
       addable
       editable
-
       @tab-remove="removeTab"
       @tab-click="clickTab"
     >
-    <!-- <router-link to="/icons"> -->
+      <!-- <router-link to="/icons"> -->
       <el-tab-pane
         v-for="item in tagsview.editTabs"
         :key="item.name"
@@ -20,7 +19,7 @@
         {{ item.content }}
         <router-view></router-view>
       </el-tab-pane>
-    <!-- </router-link> -->
+      <!-- </router-link> -->
     </el-tabs>
   </div>
 </template>
@@ -30,7 +29,6 @@ export default {
   data() {
     return {
       // editableTabsValue: "2",
-      // tabIndex: 2,
     };
   },
   computed: {
@@ -45,11 +43,10 @@ export default {
     },
     clickTab(tab) {
       let sopath = this.tagsview.editTabs;
-      let pat = sopath.filter(item => {
-        return item.name === tab.name
-      })
-      this.$router.push(pat[0].ispath)
-      
+      let pat = sopath.filter((item) => {
+        return item.name === tab.name;
+      });
+      this.$router.push(pat[0].ispath);
     },
   },
 };

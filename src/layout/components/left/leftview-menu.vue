@@ -6,7 +6,7 @@
         default-active="2"
         unique-opened
         class="el-menu-vertical-demo"
-        @open="handleOpen"
+        @open="2"
         @close="handleClose"
       >
         <Sidebar
