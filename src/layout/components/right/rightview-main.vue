@@ -47,6 +47,16 @@ export default {
         return item.name === tab.name;
       });
       this.$router.push(pat[0].ispath);
+      let un = this.routes.forEach((el,i ) => {
+        if(el.children){
+         el.children.forEach(it =>{
+            if(it.path == pat[0].ispath){
+              this.$store.dispatch("menuco", el);
+            }
+          })
+        }
+      });
+
     },
   },
 };

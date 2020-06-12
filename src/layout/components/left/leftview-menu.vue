@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="logo">LOGO</div>
+    <div class="logo"  @click="menuoc">LOGO</div>
     <div class="menu">
       <el-menu
         default-active="2"
@@ -8,6 +8,7 @@
         class="el-menu-vertical-demo"
         @open="2"
         @close="handleClose"
+        ref="menus"
       >
         <Sidebar
           :index="item.index"
@@ -29,13 +30,18 @@ export default {
       menuname: "选项1",
     };
   },
+  watch:{
+    
+  },
   computed: {
-    // ...mapGetters(["addtags"]),
+    ...mapGetters(["tagsview"]),
     routes() {
       // console.log(this.$router.options);
       // console.log(this.$router.options.routes);
       return this.$router.options.routes;
     },
+  },
+  mounted(){
   },
   components: {
     Sidebar,
@@ -45,6 +51,9 @@ export default {
     // addtag() {
     //   this.$store.dispatch("addtags", this.menuname);
     // },
+    menuoc(){
+      this.$refs.menus.open('this.tagsview')
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },

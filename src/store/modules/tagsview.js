@@ -5,6 +5,7 @@ const tagsview = {
     tabIndex: "0",
     editTabs: [],
     ispath: "",
+    st:""
   },
   mutations: {
     [types.ADD_TAGS]: (state, targetName) => {
@@ -43,6 +44,9 @@ const tagsview = {
       state.editableTabsValue = activeName;
       state.editTabs = tabs.filter((tab) => tab.name !== targetName);
     },
+    [types.MENU_OC]:(state,st)=> {
+      state.st =st.path
+    }
   },
   actions: {
     addtags({ commit, state }, targetName) {
@@ -58,6 +62,9 @@ const tagsview = {
     removeTab({ commit, state }, targetName) {
       commit(types.REMOVE_TAGS, targetName);
     },
+    menuco({commit},st){
+      commit(types.MENU_OC, st);
+    }
   },
 };
 

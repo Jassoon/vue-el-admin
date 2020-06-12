@@ -15,7 +15,7 @@ const routes = [
     hidden: true,
   },
   {
-    path: "",
+    path: "/guide",
     component: Layout,
     // redirect: "/guide/index",
     meta: { title: "综合区", icon: "guide", noCache: true },
