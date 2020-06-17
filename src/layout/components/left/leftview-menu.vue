@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="logo"  @click="menuoc">LOGO</div>
+    <div class="logo">LOGO</div>
     <div class="menu">
       <el-menu
         default-active="2"
@@ -31,15 +31,16 @@ export default {
     };
   },
   watch:{
-    
+    routerpath:"menuoc"
   },
   computed: {
     ...mapGetters(["tagsview"]),
     routes() {
-      // console.log(this.$router.options);
-      // console.log(this.$router.options.routes);
       return this.$router.options.routes;
     },
+    routerpath(){
+     return this.$route.path
+    }
   },
   mounted(){
   },
@@ -52,7 +53,20 @@ export default {
     //   this.$store.dispatch("addtags", this.menuname);
     // },
     menuoc(){
-      this.$refs.menus.open('this.tagsview')
+      let sopath = this.tagsview.editTabs;
+      let path = sopath.filter((item) => {
+        return item.ispath === this.routerpath;
+      });
+      this.routes.forEach((el,i ) => {
+        if(el.children){
+         el.children.forEach(it =>{
+            if(it.path == path[0].ispath){
+              this.$refs.menus.open(el.path)
+            }
+          })
+        }
+      });
+
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
