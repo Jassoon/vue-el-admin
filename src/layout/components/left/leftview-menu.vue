@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="logo">LOGO</div>
+    <div class="logo"></div>
     <div class="menu">
       <el-menu
         default-active="2"
@@ -54,7 +54,8 @@ export default {
     // },
     menuoc(){
       let sopath = this.tagsview.editTabs;
-      let path = sopath.filter((item) => {
+      if(sopath.length!==0){
+        let path = sopath.filter((item) => {
         return item.ispath === this.routerpath;
       });
       this.routes.forEach((el,i ) => {
@@ -66,10 +67,10 @@ export default {
           })
         }
       });
-
+    }
     },
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
       // console.log(key, keyPath);

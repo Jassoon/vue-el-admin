@@ -31,7 +31,7 @@ const routes = [
         path: "/user",
         component: () => import("@/views/user/index"),
         name: "user",
-        meta: { title: "指南二", icon: "guide", noCache: true },
+        meta: { title: "用户", icon: "guide", noCache: true },
       },
     ],
   },
@@ -60,8 +60,8 @@ const routes = [
         component: () => import("@/views/icons/icons"),
         name: "test-page-index",
         meta: {
-          tagName: "测试页",
-          title: "测试页",
+          tagName: "icon",
+          title: "测试页ICON",
           icon: "qq",
           noCache: false,
         },
@@ -72,7 +72,7 @@ const routes = [
         name: "test-page-index2",
         meta: {
           tagName: "表格样式",
-          title: "测试页2",
+          title: "表格",
           icon: "user",
           noCache: false,
         },
