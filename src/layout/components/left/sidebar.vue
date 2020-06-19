@@ -13,7 +13,7 @@
                 editableTabsValue: tagsview.editableTabsValue,
                 title: citem.meta.title,
                 path: citem.path,
-              })
+              },0)
             "
           >
             {{ citem.meta.title }}
@@ -40,8 +40,11 @@ export default {
     ...mapGetters(["tagsview"]),
   },
   methods: {
-    addtag(editcons) {
-      this.$store.dispatch("addtags", editcons);
+    addtag(editcons,num) {
+      let sopath = this.tagsview.editTabs;
+      // if(sopath.length!==0){
+        this.$store.dispatch("addtags", editcons);
+      // }
     },
   },
 };

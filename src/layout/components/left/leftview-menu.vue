@@ -53,28 +53,47 @@ export default {
     // addtag() {
     //   this.$store.dispatch("addtags", this.menuname);
     // },
-    toMenupath(path){
-      // this.$refs.sidebar.addtag()
-
-
-
+    toMenupath(){
       let sopath = this.tagsview.editTabs;
+      let editcons = {
+        editableTabsValue: "0",
+        title: "",
+        path: "",
+      }
       if(sopath.length!==0){
         let path = sopath.filter((item) => {
         return item.ispath === this.routerpath;
-      });
-      this.$store.dispatch("editTab",{path:path[0].ispath,name:path[0].name})
-      this.routes.forEach((el,i ) => {
-        if(el.children){
-          el.children.forEach(it =>{
-            if(it.path == path[0].ispath){
-              this.$refs.menus.open(el.path)
-            }
-          })
-        }
-      });
-    }else{
-      this.$refs.sidebar.addtag()
+      });      
+      if(path.length!==0){
+        this.routes.forEach((el,i ) => {
+          if(el.children){
+            el.children.forEach(it =>{
+              if(it.path == path[0].ispath){
+                this.$refs.menus.open(el.path)
+                editcons.editableTabsValue=path[0].name
+                editcons.title=it.meta.title
+                editcons.path=it.path
+              }
+            })
+          }
+        });  
+      }else{
+        let nameNum=sopath.slice(-1)[0].name
+        this.routes.forEach((el,i ) => {
+          if(el.children){
+            el.children.forEach(it =>{
+              if(it.path == this.routerpath){
+                this.$refs.menus.open(el.path)
+                editcons.editableTabsValue= nameNum++
+                editcons.title=it.meta.title
+                editcons.path=it.path
+              }
+            })
+          }
+        });  
+      }    
+       this.$store.dispatch("addtags", editcons);
+      // this.$refs.sidebar.addtag(editcons)
     }
     },
     handleOpen(key, keyPath) {
