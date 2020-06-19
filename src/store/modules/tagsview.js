@@ -7,24 +7,23 @@ const tagsview = {
     ispath: ""
   },
   mutations: {
-    [types.ADD_TAGS]: (state, targetName) => {
+    [types.ADD_TAGS]: (state, targetEvent) => {
       let iftitle = state.editTabs.filter((item) => {
-        return item.title === targetName.title;
+        return item.title === targetEvent.title;
       });
       if (iftitle.length === 0) {
         let newTabName = ++state.tabIndex + "";
         state.editTabs.push({
-          title: targetName.title,
+          title: targetEvent.title,
           name: newTabName,
-          ispath: targetName.path,
-          content: newTabName + "试试",
+          ispath: targetEvent.path,
+          // content: newTabName + "试试",
         });
         state.editableTabsValue = newTabName;
-        state.ispath = targetName.path;
+        state.ispath = targetEvent.path;
       } else {
-        iftitle.forEach((item, i) => {
-          state.editableTabsValue = item.name;
-        });
+        state.editableTabsValue = iftitle[0].name;
+        state.ispath = iftitle[0].ispath;
       }
     },
     [types.REMOVE_TAGS]: (state, targetName) => {
@@ -45,13 +44,13 @@ const tagsview = {
       state.editTabs = tabs.filter((tab) => tab.name !== targetName);
     },
     [types.EDIT_TAGS]:(state,targetName)=>{
-      state.editableTabsValue = targetName.tab.name
+      state.editableTabsValue = targetName.name
       state.ispath = targetName.path
     }
   },
   actions: {
-    addtags({ commit, state }, targetName) {
-      commit(types.ADD_TAGS, targetName);
+    addtags({ commit, state }, targetEvent) {
+      commit(types.ADD_TAGS, targetEvent);
     },
     removeTab({ commit, state }, targetName) {
       commit(types.REMOVE_TAGS, targetName);

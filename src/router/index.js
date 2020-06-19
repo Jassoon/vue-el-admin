@@ -35,12 +35,20 @@ const routes = [
       },
     ],
   },
-
   {
     path: "/",
     name: "Layout",
     component: Layout,
     hidden: true,
+    // redirect: "/guide",
+    meta: { title: "主页", icon: "home", noCache: true },
+    children: [
+      {
+        path: "/home",
+        component: () => import("@/views/home/index"),
+        name: "Guide",
+        meta: { title: "首页", icon: "home", noCache: true },
+      }]
   },
   {
     path: "/404",

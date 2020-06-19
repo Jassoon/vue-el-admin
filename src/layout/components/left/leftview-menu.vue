@@ -15,6 +15,7 @@
           v-for="item in routes"
           :key="item.path"
           :routes="item"
+          ref="sidebar"
         ></Sidebar>
       </el-menu>
     </div>
@@ -31,7 +32,7 @@ export default {
     };
   },
   watch:{
-    routerpath:"menuoc"
+    routerpath:"toMenupath"
   },
   computed: {
     ...mapGetters(["tagsview"]),
@@ -52,21 +53,28 @@ export default {
     // addtag() {
     //   this.$store.dispatch("addtags", this.menuname);
     // },
-    menuoc(){
+    toMenupath(path){
+      // this.$refs.sidebar.addtag()
+
+
+
       let sopath = this.tagsview.editTabs;
       if(sopath.length!==0){
         let path = sopath.filter((item) => {
         return item.ispath === this.routerpath;
       });
+      this.$store.dispatch("editTab",{path:path[0].ispath,name:path[0].name})
       this.routes.forEach((el,i ) => {
         if(el.children){
-         el.children.forEach(it =>{
+          el.children.forEach(it =>{
             if(it.path == path[0].ispath){
               this.$refs.menus.open(el.path)
             }
           })
         }
       });
+    }else{
+      this.$refs.sidebar.addtag()
     }
     },
     handleOpen(key, keyPath) {

@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 20px; position:relative; min-height:500px;">
+  <div style="margin-bottom: 20px; min-height:500px;">
     <el-tabs
       v-model="tagsview.editableTabsValue"
       type="card"
@@ -23,13 +23,12 @@
         <router-view></router-view>
       </el-tab-pane>
       <!-- </router-link> -->
-      <ul v-show="menushow" :style="{left:left+'px',top:top+'px'}"  class="opmenu">
-        <li @click="removeTab(tagsview.editableTabsValue)">关闭当前</li>
-        <li @click="removeTabother(tagsview.editableTabsValue)">关闭其他</li>
-        <li @click="removeTaball">关闭所有</li>
-      </ul>
     </el-tabs>
-    
+    <ul v-show="menushow" :style="{left:left+'px',top:top+'px'}"  class="opmenu">
+      <li @click="removeTab(tagsview.editableTabsValue)">关闭当前</li>
+      <li @click="removeTabother(tagsview.editableTabsValue)">关闭其他</li>
+      <li @click="removeTaball">关闭所有</li>
+    </ul>
   </div>
 </template>
 <script>
@@ -40,6 +39,7 @@ export default {
       left:0,
       top:0,
       menushow: false,
+      // editableTabsValue:this.tagsview.editableTabsValue,
     };
   },
   watch:{
@@ -49,7 +49,8 @@ export default {
       } else {
         document.body.removeEventListener("click", this.opcloseMenu);
       }
-    }
+    },
+    routerpath:"editclickTab"
   },
   computed: {
     ...mapGetters(["tagsview"]),
@@ -61,8 +62,8 @@ export default {
     }
   },
   methods: {
-    removeTab(targetName) {
-        this.$store.dispatch("removeTab", targetName);
+    removeTab(targetEvent) {
+        this.$store.dispatch("removeTab", targetEvent);
         if(this.$route.path!==this.tagsview.ispath){
           this.$router.push(this.tagsview.ispath);
         }
@@ -83,17 +84,27 @@ export default {
     },
     clickTab(tab) {
       let sopath = this.tagsview.editTabs;
-      let pat = sopath.filter((item) => {
+      let path = sopath.filter((item) => {
         return item.name === tab.name;
       });
-      if(this.routerpath!==pat[0].ispath){
-        this.$router.push(pat[0].ispath);
-        this.$store.dispatch("editTab",{tab:tab,path:this.routerpath})
-      }      
-      
+      if(this.routerpath!==path[0].ispath){
+        this.$router.push(path[0].ispath);
+        // this.$store.dispatch("editTab",{tab:tab,path:pat[0].ispath})
+      }       
+    }, 
+    editclickTab(tab){
+      let sopath = this.tagsview.editTabs;
+      let path = sopath.filter((item) => {
+          return item.ispath === tab;
+        });
+        // if(tab!==tabo){
+          // this.$router.push(tab);
+          // this.$store.dispatch("editTab",{tab:pat[0].name,path:tab})
+        // }
+
     },
     operationMenu(t,e){
-      const menuMinWidth = 105;
+      const menuMinWidth = 100;
       const offsetLeft = this.$el.getBoundingClientRect().left;
       const offsetWidth = this.$el.offsetWidth; 
       const maxLeft = offsetWidth - menuMinWidth; 
