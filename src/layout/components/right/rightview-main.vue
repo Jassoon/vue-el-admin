@@ -1,29 +1,6 @@
 <template>
   <div style="margin-bottom: 20px; min-height:500px;">
-    <el-tabs
-      v-model="tagsview.editableTabsValue"
-      type="card"
-      closable
-      addable
-      editable
-      @tab-remove="removeTab"
-      @tab-click="clickTab"
-      @contextmenu.prevent.native="operationMenu(tagsview,$event)"
-    >
-    
-      <!-- <router-link to="/icons"> -->
-      <el-tab-pane
-        v-for="item in tagsview.editTabs"
-        :key="item.name"
-        :label="item.title"
-        :name="item.name"
-      >
-        {{ item.content }}
-        <p style="height:500px;">111111111111111</p>
-        <router-view></router-view>
-      </el-tab-pane>
-      <!-- </router-link> -->
-    </el-tabs>
+
     <ul v-show="menushow" :style="{left:left+'px',top:top+'px'}"  class="opmenu">
       <li @click="removeTab(tagsview.editableTabsValue)">关闭当前</li>
       <li @click="removeTabother(tagsview.editableTabsValue)">关闭其他</li>
