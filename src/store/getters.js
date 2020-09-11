@@ -1,4 +1,4 @@
 const getters = {
-  tagsview: (state) => state.tagsview,
+  tabsview: (state) => state.tabsview,
 };
 export default getters;

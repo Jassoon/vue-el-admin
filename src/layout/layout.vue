@@ -10,18 +10,18 @@
 </template>
 
 <script>
-import Leftview from "@/layout/components/LeftView";
-import Rightview from "@/layout/components/RightView";
+import Leftview from '@/layout/components/LeftView'
+import Rightview from '@/layout/components/RightView'
 
 export default {
   data() {
-    return {};
+    return {}
   },
   components: {
     Leftview,
     Rightview,
   },
-};
+}
 </script>
 <style scoped>
 .app-wp {
@@ -36,5 +36,6 @@ export default {
 }
 .right-view {
   margin-left: 200px;
+  position: relative;
 }
 </style>

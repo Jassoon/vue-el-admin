@@ -9,11 +9,14 @@
         <Links :to="citem.path" :key="citem.path">
           <el-menu-item
             @click="
-              addtag({
-                editableTabsValue: tagsview.editableTabsValue,
-                title: citem.meta.title,
-                path: citem.path,
-              },0)
+              addtab(
+                {
+                  editableTabsValue: tabsview.editableTabsValue,
+                  title: citem.meta.title,
+                  path: citem.path,
+                },
+                0
+              )
             "
           >
             {{ citem.meta.title }}
@@ -24,11 +27,11 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import Links from "../links";
+import { mapGetters } from 'vuex'
+import Links from '../links'
 export default {
   data() {
-    return {};
+    return {}
   },
   components: {
     Links,
@@ -37,17 +40,17 @@ export default {
     routes: Object,
   },
   computed: {
-    ...mapGetters(["tagsview"]),
+    ...mapGetters(['tabsview']),
   },
   methods: {
-    addtag(editcons,num) {
-      let sopath = this.tagsview.editTabs;
+    addtab(editcons, num) {
+      let sopath = this.tabsview.editTabs
       // if(sopath.length!==0){
-        this.$store.dispatch("addtags", editcons);
+      this.$store.dispatch('addtags', editcons)
       // }
     },
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 .router-link-active li {

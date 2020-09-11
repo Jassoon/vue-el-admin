@@ -1,4 +1,8 @@
-const   ADD_TAGS = "ADD_TAGS",
-        REMOVE_TAGS = "REMOVE_TAGS",
-        EDIT_TAGS = "EDIT_TAGS"
-export default {ADD_TAGS,REMOVE_TAGS,EDIT_TAGS};
+const ADD_TABS = "ADD_TABS",
+  REMOVE_TABS = "REMOVE_TABS",
+  EDIT_TABS = "EDIT_TABS"
+export default {
+  ADD_TABS,
+  REMOVE_TABS,
+  EDIT_TABS
+};

@@ -22,29 +22,28 @@
   </section>
 </template>
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
-import Sidebar from "./sidebar";
+import { mapState, mapGetters, mapActions } from 'vuex'
+import Sidebar from './sidebar'
 export default {
   data() {
     return {
       // addtags: null,
-      menuname: "选项1",
-    };
-  },
-  watch:{
-    routerpath:"toMenupath"
-  },
-  computed: {
-    ...mapGetters(["tagsview"]),
-    routes() {
-      return this.$router.options.routes;
-    },
-    routerpath(){
-     return this.$route.path
+      menuname: '选项1',
     }
   },
-  mounted(){
+  watch: {
+    routerpath: 'toMenupath',
   },
+  computed: {
+    ...mapGetters(['tabsview']),
+    routes() {
+      return this.$router.options.routes
+    },
+    routerpath() {
+      return this.$route.path
+    },
+  },
+  mounted() {},
   components: {
     Sidebar,
   },
@@ -53,48 +52,48 @@ export default {
     // addtag() {
     //   this.$store.dispatch("addtags", this.menuname);
     // },
-    toMenupath(){
-      let sopath = this.tagsview.editTabs;
+    toMenupath() {
+      let sopath = this.tabsview.editTabs
       let editcons = {
-        editableTabsValue: "0",
-        title: "",
-        path: "",
+        editableTabsValue: '0',
+        title: '',
+        path: '',
       }
-      if(sopath.length!==0){
+      if (sopath.length !== 0) {
         let path = sopath.filter((item) => {
-        return item.ispath === this.routerpath;
-      });      
-      if(path.length!==0){
-        this.routes.forEach((el,i ) => {
-          if(el.children){
-            el.children.forEach(it =>{
-              if(it.path == path[0].ispath){
-                this.$refs.menus.open(el.path)
-                editcons.editableTabsValue=path[0].name
-                editcons.title=it.meta.title
-                editcons.path=it.path
-              }
-            })
-          }
-        });  
-      }else{
-        let nameNum=sopath.slice(-1)[0].name
-        this.routes.forEach((el,i ) => {
-          if(el.children){
-            el.children.forEach(it =>{
-              if(it.path == this.routerpath){
-                this.$refs.menus.open(el.path)
-                editcons.editableTabsValue= nameNum++
-                editcons.title=it.meta.title
-                editcons.path=it.path
-              }
-            })
-          }
-        });  
-      }    
-       this.$store.dispatch("addtags", editcons);
-      // this.$refs.sidebar.addtag(editcons)
-    }
+          return item.ispath === this.routerpath
+        })
+        if (path.length !== 0) {
+          this.routes.forEach((el, i) => {
+            if (el.children) {
+              el.children.forEach((it) => {
+                if (it.path == path[0].ispath) {
+                  this.$refs.menus.open(el.path)
+                  editcons.editableTabsValue = path[0].name
+                  editcons.title = it.meta.title
+                  editcons.path = it.path
+                }
+              })
+            }
+          })
+        } else {
+          let nameNum = sopath.slice(-1)[0].name
+          this.routes.forEach((el, i) => {
+            if (el.children) {
+              el.children.forEach((it) => {
+                if (it.path == this.routerpath) {
+                  this.$refs.menus.open(el.path)
+                  editcons.editableTabsValue = nameNum++
+                  editcons.title = it.meta.title
+                  editcons.path = it.path
+                }
+              })
+            }
+          })
+        }
+        this.$store.dispatch('addtags', editcons)
+        // this.$refs.sidebar.addtag(editcons)
+      }
     },
     handleOpen(key, keyPath) {
       // console.log(key, keyPath);
@@ -103,7 +102,7 @@ export default {
       // console.log(key, keyPath);
     },
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 .logo {

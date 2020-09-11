@@ -1,5 +1,5 @@
 import types from "../types.js";
-const tagsview = {
+const tabsview = {
   state: {
     editableTabsValue: "0",
     tabIndex: "0",
@@ -7,7 +7,7 @@ const tagsview = {
     ispath: ""
   },
   mutations: {
-    [types.ADD_TAGS]: (state, targetEvent) => {
+    [types.ADD_TABS]: (state, targetEvent) => {
       let iftitle = state.editTabs.filter((item) => {
         return item.title === targetEvent.title;
       });
@@ -17,7 +17,6 @@ const tagsview = {
           title: targetEvent.title,
           name: newTabName,
           ispath: targetEvent.path,
-          // content: newTabName + "试试",
         });
         state.editableTabsValue = newTabName;
         state.ispath = targetEvent.path;
@@ -26,7 +25,7 @@ const tagsview = {
         state.ispath = iftitle[0].ispath;
       }
     },
-    [types.REMOVE_TAGS]: (state, targetName) => {
+    [types.REMOVE_TABS]: (state, targetName) => {
       let tabs = state.editTabs;
       let activeName = state.editableTabsValue;
       if (activeName === targetName) {
@@ -43,22 +42,31 @@ const tagsview = {
       state.editableTabsValue = activeName;
       state.editTabs = tabs.filter((tab) => tab.name !== targetName);
     },
-    [types.EDIT_TAGS]:(state,targetName)=>{
+    [types.EDIT_TAGS]: (state, targetName) => {
       state.editableTabsValue = targetName.name
       state.ispath = targetName.path
     }
   },
   actions: {
-    addtags({ commit, state }, targetEvent) {
-      commit(types.ADD_TAGS, targetEvent);
+    addtags({
+      commit,
+      state
+    }, targetEvent) {
+      commit(types.ADD_TABS, targetEvent);
     },
-    removeTab({ commit, state }, targetName) {
-      commit(types.REMOVE_TAGS, targetName);
+    removeTab({
+      commit,
+      state
+    }, targetName) {
+      commit(types.REMOVE_TABS, targetName);
     },
-    editTab({ commit, state }, targetName) {
-      commit(types.EDIT_TAGS, targetName);
+    editTab({
+      commit,
+      state
+    }, targetName) {
+      commit(types.EDIT_TABS, targetName);
     }
   },
 };
 
-export default tagsview;
+export default tabsview;
