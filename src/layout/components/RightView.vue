@@ -1,22 +1,25 @@
 <template>
   <section>
-    <Rightviewnav></Rightviewnav>
-    <Rightviewtags></Rightviewtags>
-    <Rightviewmain></Rightviewmain>
+    <RightViewNav></RightViewNav>
+    <RightViewTags></RightViewTags>
+    <RightViewTabs></RightViewTabs>
+    <RightViewMain></RightViewMain>
   </section>
 </template>
 <script>
-import Rightviewnav from "@/layout/components/right/rightview-nav";
-import Rightviewtags from "@/layout/components/right/rightview-tags";
-import Rightviewmain from "@/layout/components/right/rightview-main";
+import RightViewNav from '@/layout/components/right/rightview-nav'
+import RightViewTags from '@/layout/components/right/rightview-tags'
+import RightViewTabs from '@/layout/components/right/rightview-tabs'
+import RightViewMain from '@/layout/components/right/rightview-main'
 export default {
   data() {
-    return {};
+    return {}
   },
   components: {
-    Rightviewnav,
-    Rightviewtags,
-    Rightviewmain,
+    RightViewNav,
+    RightViewTags,
+    RightViewTabs,
+    RightViewMain,
   },
-};
+}
 </script>

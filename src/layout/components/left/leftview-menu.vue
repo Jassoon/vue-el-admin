@@ -27,7 +27,6 @@ import Sidebar from './sidebar'
 export default {
   data() {
     return {
-      // addtags: null,
       menuname: '选项1',
     }
   },
@@ -43,21 +42,23 @@ export default {
       return this.$route.path
     },
   },
-  mounted() {},
+  mounted() {
+    this.toMenupath()
+  },
   components: {
     Sidebar,
   },
   methods: {
-    // ...mapActions({"addtags"}),
+    // ...mapActions({"addtabs"}),
     // addtag() {
-    //   this.$store.dispatch("addtags", this.menuname);
+    //   this.$store.dispatch("addtabs", this.menuname);
     // },
     toMenupath() {
       let sopath = this.tabsview.editTabs
       let editcons = {
         editableTabsValue: '0',
-        title: '',
-        path: '',
+        title: '首页',
+        path: '/home',
       }
       if (sopath.length !== 0) {
         let path = sopath.filter((item) => {
@@ -67,7 +68,7 @@ export default {
           this.routes.forEach((el, i) => {
             if (el.children) {
               el.children.forEach((it) => {
-                if (it.path == path[0].ispath) {
+                if (it.path == path[0].ispath && it.path !== '/home') {
                   this.$refs.menus.open(el.path)
                   editcons.editableTabsValue = path[0].name
                   editcons.title = it.meta.title
@@ -91,8 +92,9 @@ export default {
             }
           })
         }
-        this.$store.dispatch('addtags', editcons)
-        // this.$refs.sidebar.addtag(editcons)
+        this.$store.dispatch('addtabs', editcons)
+      } else {
+        this.$store.dispatch('addtabs', editcons)
       }
     },
     handleOpen(key, keyPath) {

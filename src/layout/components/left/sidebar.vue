@@ -46,7 +46,7 @@ export default {
     addtab(editcons, num) {
       let sopath = this.tabsview.editTabs
       // if(sopath.length!==0){
-      this.$store.dispatch('addtags', editcons)
+      this.$store.dispatch('addtabs', editcons)
       // }
     },
   },

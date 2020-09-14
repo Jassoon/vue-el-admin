@@ -48,7 +48,7 @@ const tabsview = {
     }
   },
   actions: {
-    addtags({
+    addtabs({
       commit,
       state
     }, targetEvent) {

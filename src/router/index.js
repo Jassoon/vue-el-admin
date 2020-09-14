@@ -7,8 +7,7 @@ import Login from "@/views/login/index";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/login",
     name: "login",
     component: Login,
@@ -18,20 +17,31 @@ const routes = [
     path: "/guide",
     component: Layout,
     // redirect: "/guide/index",
-    meta: { title: "综合区", icon: "guide", noCache: true },
+    meta: {
+      title: "综合区",
+      icon: "guide",
+      noCache: true
+    },
     hidden: false,
-    children: [
-      {
+    children: [{
         path: "/guide",
         component: () => import("@/views/guide/index"),
         name: "Guide",
-        meta: { title: "指南一", icon: "guide", noCache: true },
+        meta: {
+          title: "指南一",
+          icon: "guide",
+          noCache: true
+        },
       },
       {
         path: "/user",
         component: () => import("@/views/user/index"),
         name: "user",
-        meta: { title: "用户", icon: "guide", noCache: true },
+        meta: {
+          title: "用户",
+          icon: "guide",
+          noCache: true
+        },
       },
     ],
   },
@@ -40,15 +50,17 @@ const routes = [
     name: "Layout",
     component: Layout,
     hidden: true,
-    // redirect: "/guide",
-    meta: { title: "主页", icon: "home", noCache: true },
-    children: [
-      {
-        path: "/home",
-        component: () => import("@/views/home/index"),
-        name: "Guide",
-        meta: { title: "首页", icon: "home", noCache: true },
-      }]
+    redirect: "/home",
+    children: [{
+      path: "/home",
+      component: () => import("@/views/home/index"),
+      name: "Guide",
+      meta: {
+        title: "首页",
+        icon: "home",
+        noCache: true
+      },
+    }]
   },
   {
     path: "/404",
@@ -59,11 +71,14 @@ const routes = [
     path: "/icons/icons",
     component: Layout,
     // redirect: '/page/test-page/index',
-    meta: { title: "测试菜单", icon: "goods", noCache: true },
+    meta: {
+      title: "测试菜单",
+      icon: "goods",
+      noCache: true
+    },
     name: "test-page",
     hidden: false,
-    children: [
-      {
+    children: [{
         path: "/icons",
         component: () => import("@/views/icons/icons"),
         name: "test-page-index",

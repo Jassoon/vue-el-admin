@@ -1,5 +1,41 @@
 <template>
-  <router-view />
+  <div>
+    <scrollPane>
+      <div class="edittabs">
+        <div
+          v-for="item in tabsview.editTabs"
+          ref="tab"
+          :key="item.name"
+          class="tab"
+        >
+          <router-link
+            :to="item.ispath"
+            @contextmenu.prevent.native="operationMenu(item.name, $event)"
+          >
+            {{ item.title }}
+          </router-link>
+          <el-button
+            v-if="item.title !== '首页'"
+            type=""
+            round
+            size="mini"
+            icon="el-icon-close"
+            class="tab-close"
+            @click="removeTab(item.name)"
+          ></el-button>
+        </div>
+      </div>
+    </scrollPane>
+    <ul
+      v-show="menushow"
+      :style="{ left: left + 'px', top: top + 'px' }"
+      class="opmenu"
+    >
+      <li @click="removeTab(nowtab)">关闭当前</li>
+      <li @click="removeTabother(nowtab)">关闭其他</li>
+      <li @click="removeTaball">关闭所有</li>
+    </ul>
+  </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -73,7 +109,6 @@ export default {
       })
     },
     operationMenu(i, e) {
-      console.log(e)
       this.nowtab = i
       const menuMinWidth = 100
       const offsetLeft = this.$el.getBoundingClientRect().left
