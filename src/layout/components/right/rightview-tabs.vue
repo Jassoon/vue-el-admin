@@ -12,17 +12,17 @@
             :to="item.ispath"
             @contextmenu.prevent.native="operationMenu(item.name, $event)"
           >
-            {{ item.title }}
+            <span> {{ item.title }}</span>
+            <el-button
+              v-if="item.title !== '首页'"
+              type=""
+              round
+              size="mini"
+              icon="el-icon-close"
+              class="tab-close"
+              @click.native.prevent="removeTab(item.name)"
+            ></el-button>
           </router-link>
-          <el-button
-            v-if="item.title !== '首页'"
-            type=""
-            round
-            size="mini"
-            icon="el-icon-close"
-            class="tab-close"
-            @click="removeTab(item.name)"
-          ></el-button>
         </div>
       </div>
     </scrollPane>
@@ -153,10 +153,12 @@ export default {
     justify-content: space-around;
     align-items: center;
     a {
-      width: 70%;
-    }
-    span {
-      width: 30%;
+      width: 100%;
+      border-radius: 5px;
+      span {
+        display: inline-block;
+        width: 70%;
+      }
     }
   }
 }
@@ -179,6 +181,12 @@ export default {
     &:hover {
       background: #eee;
     }
+  }
+}
+.router-link-active {
+  background: coral;
+  .el-button.tab-close {
+    background: #fff;
   }
 }
 </style>

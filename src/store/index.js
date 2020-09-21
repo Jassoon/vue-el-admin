@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import tabsview from "./modules/tabsview";
+import tabsview from "./modules/TabsView";
 import getters from "./getters";
 
 Vue.use(Vuex);

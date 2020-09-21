@@ -7,6 +7,7 @@ import store from "./store";
 import "./style/global.scss";
 
 Vue.config.productionTip = false;
+//全样式使用ElementUI搭建 请参考: https://element.eleme.cn/
 Vue.use(ElementUI);
 
 new Vue({

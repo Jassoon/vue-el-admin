@@ -2,36 +2,43 @@
   <section>
     <div class="logo"></div>
     <div class="menu">
+      <div class="menutoggle" @click="ToggleMenu">
+        <i
+          class="menuarrow"
+          :class="isCollapse ? 'el-icon-d-arrow-right' : 'el-icon-d-arrow-left'"
+        ></i>
+      </div>
       <el-menu
+        :collapse="isCollapse"
         default-active="2"
         unique-opened
         class="el-menu-vertical-demo"
-        @open="2"
+        @open="handleOpen"
         @close="handleClose"
         ref="menus"
       >
-        <Sidebar
+        <SideBar
           :index="item.index"
           v-for="item in routes"
           :key="item.path"
           :routes="item"
           ref="sidebar"
-        ></Sidebar>
+        ></SideBar>
       </el-menu>
     </div>
   </section>
 </template>
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import Sidebar from './sidebar'
+import SideBar from './sidebar'
 export default {
   data() {
     return {
-      menuname: '选项1',
+      isCollapse: false,
     }
   },
   watch: {
-    routerpath: 'toMenupath',
+    routerpath: 'ToMenuPath',
   },
   computed: {
     ...mapGetters(['tabsview']),
@@ -43,17 +50,17 @@ export default {
     },
   },
   mounted() {
-    this.toMenupath()
+    this.ToMenuPath()
   },
   components: {
-    Sidebar,
+    SideBar,
   },
   methods: {
-    // ...mapActions({"addtabs"}),
-    // addtag() {
-    //   this.$store.dispatch("addtabs", this.menuname);
-    // },
-    toMenupath() {
+    //左侧导航伸缩控制
+    ToggleMenu() {
+      this.isCollapse = !this.isCollapse
+    },
+    ToMenuPath() {
       let sopath = this.tabsview.editTabs
       let editcons = {
         editableTabsValue: '0',
@@ -106,18 +113,52 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
+<style rel="stylesheet/scss" lang="scss" scoped>
 .logo {
   width: 100%;
   height: 120px;
-  background: #000;
+  background: #333;
   color: #fff;
   text-align: center;
 }
 .menu {
-  background: #545c64;
+  position: relative;
+}
+.menutoggle {
+  width: 23px;
+  height: 70px;
+  position: absolute;
+  background: #333;
+  right: -25px;
+  top: 300px;
+  cursor: pointer;
+  padding: 50px 0 0 2px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  .menuarrow {
+    font-size: 20px;
+    color: #fff;
+  }
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
 .el-menu {
   border: none;
+  background: #333;
+}
+
+::v-deep .el-submenu__title {
+  color: #fff;
+}
+::v-deep .el-submenu__title:hover {
+  background: #666;
+}
+::v-deep .el-menu-item:hover {
+  background: #ccc;
+}
+::v-deep .router-link-active li:hover {
+  background: coral;
 }
 </style>

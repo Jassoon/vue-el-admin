@@ -30,9 +30,9 @@ export default {
 }
 .left-view {
   position: fixed;
-  width: 200px;
   height: 100%;
-  background: #545c64;
+  background: #333;
+  z-index: 100;
 }
 .right-view {
   margin-left: 200px;
