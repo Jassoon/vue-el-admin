@@ -42,6 +42,7 @@ import {
   
  } from 'vuex'
 import ScrollPane from '@/components/ScrollPane'
+import {mapGetters} from 'vuex'
 export default {
   data() {
     return {
