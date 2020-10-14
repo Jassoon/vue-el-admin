@@ -2,28 +2,23 @@
   <section>
     <div class="logo"></div>
     <div class="menu">
-      <div class="menutoggle" @click="ToggleMenu">
-        <i
-          class="menuarrow"
-          :class="isCollapse ? 'el-icon-d-arrow-right' : 'el-icon-d-arrow-left'"
-        ></i>
+      <div class="menutoggle"
+           @click="ToggleMenu">
+        <i class="menuarrow"
+           :class="togglestate.togglestate ? 'el-icon-d-arrow-right' : 'el-icon-d-arrow-left'"></i>
       </div>
-      <el-menu
-        :collapse="isCollapse"
-        default-active="2"
-        unique-opened
-        class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
-        ref="menus"
-      >
-        <SideBar
-          :index="item.index"
-          v-for="item in routes"
-          :key="item.path"
-          :routes="item"
-          ref="sidebar"
-        ></SideBar>
+      <el-menu :collapse="togglestate.togglestate"
+               default-active="2"
+               unique-opened
+               class="el-menu-vertical-demo"
+               @open="handleOpen"
+               @close="handleClose"
+               ref="menus">
+        <SideBar :index="item.index"
+                 v-for="item in routes"
+                 :key="item.path"
+                 :routes="item"
+                 ref="sidebar"></SideBar>
       </el-menu>
     </div>
   </section>
@@ -32,24 +27,23 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import SideBar from './sidebar'
 export default {
-  data() {
+  data () {
     return {
-      isCollapse: false,
     }
   },
   watch: {
     routerpath: 'ToMenuPath',
   },
   computed: {
-    ...mapGetters(['tabsview']),
-    routes() {
+    ...mapGetters(['tabsview', 'togglestate']),
+    routes () {
       return this.$router.options.routes
     },
-    routerpath() {
+    routerpath () {
       return this.$route.path
     },
   },
-  mounted() {
+  mounted () {
     this.ToMenuPath()
   },
   components: {
@@ -57,10 +51,10 @@ export default {
   },
   methods: {
     //左侧导航伸缩控制
-    ToggleMenu() {
-      this.isCollapse = !this.isCollapse
+    ToggleMenu () {
+      this.$store.dispatch('togglemenu')
     },
-    ToMenuPath() {
+    ToMenuPath () {
       let sopath = this.tabsview.editTabs
       let editcons = {
         editableTabsValue: '0',
@@ -104,10 +98,10 @@ export default {
         this.$store.dispatch('addtabs', editcons)
       }
     },
-    handleOpen(key, keyPath) {
+    handleOpen (key, keyPath) {
       // console.log(key, keyPath);
     },
-    handleClose(key, keyPath) {
+    handleClose (key, keyPath) {
       // console.log(key, keyPath);
     },
   },

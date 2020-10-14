@@ -3,7 +3,8 @@
     <section class="left-view">
       <Leftview></Leftview>
     </section>
-    <section class="right-view">
+    <section class="right-view"
+             :class="togglestate.togglestate?'right-close':'right-open'">
       <Rightview></Rightview>
     </section>
   </article>
@@ -12,15 +13,24 @@
 <script>
 import Leftview from '@/layout/components/LeftView'
 import Rightview from '@/layout/components/RightView'
+import Cookies from 'js-cookie'
+import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {}
+  data () {
+    return {
+    }
+  },
+  computed: {
+    ...mapGetters(["togglestate"]),
   },
   components: {
     Leftview,
     Rightview,
   },
+  mounted () {
+
+  }
 }
 </script>
 <style scoped>
@@ -35,7 +45,14 @@ export default {
   z-index: 100;
 }
 .right-view {
-  margin-left: 200px;
   position: relative;
+}
+.right-open {
+  margin-left: 200px;
+  transition: margin-left ease-in-out 0.3s;
+}
+.right-close {
+  margin-left: 64px;
+  transition: margin-left ease-in-out 0.29s;
 }
 </style>

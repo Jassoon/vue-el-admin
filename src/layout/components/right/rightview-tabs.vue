@@ -38,7 +38,9 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { 
+  
+ } from 'vuex'
 import ScrollPane from '@/components/ScrollPane'
 export default {
   data() {
